@@ -15,4 +15,4 @@
 //   napsání přímo na e-mail.)
 // ============================================================
 
-export const WEB3FORMS_ACCESS_KEY = ''
+export const WEB3FORMS_ACCESS_KEY = '123c830c-a9a8-4e9d-8995-0320db991c71'
