@@ -16,6 +16,7 @@ export const projects = [
   { id: 'v10', category: 'ai', vertical: true, youtubeId: 'k8EWqzeatAg', titleCs: 'DronPro — AI short II', titleEn: 'DronPro — AI short II' },
   { id: 'v11', category: 'reels', vertical: true, youtubeId: 'tSfYluucZsc', titleCs: 'Mercedes — Instagram reels', titleEn: 'Mercedes — Instagram reel' },
   { id: 'v12', category: 'youtube', vertical: false, youtubeId: 'fGARiuXM0M8', titleCs: 'Dáváme — podcast', titleEn: 'Dáváme — podcast' },
+  { id: 'v13', category: 'reels', vertical: true, youtubeId: 'XdJ48F5NLfM', titleCs: 'Content Partner — Instagram short', titleEn: 'Content Partner — Instagram short' },
 ]
 
 // pořadí odpovídá filtrům v translations (Vše, Reels & Shorts, YouTube, Reklama, Motion, AI videa)

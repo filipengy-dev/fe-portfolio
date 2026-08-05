@@ -15,7 +15,7 @@ const exampleIds = [
   'tSfYluucZsc', // 02 Vertikální videa -> Mercedes Instagram reels
   'fGARiuXM0M8', // 03 YouTube & podcasty-> Dáváme podcast
   'Y6peuxHWSYk', // 04 Motion grafika   -> Tycoon motion grafika
-  'tSfYluucZsc', // 05 Titulky & grafika-> Mercedes Instagram reels
+  'XdJ48F5NLfM', // 05 Titulky & grafika-> Content Partner Instagram short
   'agJAubvtNJY', // 06 Barevné korekce  -> DronPro recenze
   null, // 07 Thumbnaily
   null, // 08 Nápad & scénář
