@@ -247,4 +247,6 @@ export const clients = [
   { name: 'DronPro', logo: '/logos/dronpro.png' },
   { name: 'BetterLady', logo: '/logos/betterlady.png' },
   { name: 'SuperTlapka', logo: '/logos/supertlapka.png' },
+  // inv: logo se jen invertuje (zachová si detaily), místo plné bílé siluety
+  { name: 'Proti Proudu', logo: '/logos/proti-proudu.webp', inv: true },
 ]

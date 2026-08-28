@@ -12,7 +12,12 @@ export default function Marquee() {
         {loop.map((c, i) => (
           <span className="marquee-item" key={i}>
             {c.logo ? (
-              <img className="marquee-logo" src={c.logo} alt={c.name} loading="lazy" />
+              <img
+                className={`marquee-logo ${c.inv ? 'inv' : ''}`}
+                src={c.logo}
+                alt={c.name}
+                loading="lazy"
+              />
             ) : (
               c.name
             )}

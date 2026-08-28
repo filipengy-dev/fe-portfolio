@@ -916,12 +916,8 @@ body::before {
 }
 .marquee-track {
   display: flex;
-  gap: 56px;
   width: max-content;
-  animation: scroll 28s linear infinite;
-}
-.marquee:hover .marquee-track {
-  animation-play-state: paused;
+  animation: scroll 30s linear infinite;
 }
 .marquee-item {
   font-family: var(--font-display);
@@ -934,6 +930,8 @@ body::before {
   display: flex;
   align-items: center;
   gap: 56px;
+  /* mezera je součástí položky -> posun o -50 % je přesný, smyčka beze švu */
+  padding-right: 56px;
   transition: color 0.25s;
 }
 .marquee-item:hover {
@@ -950,6 +948,11 @@ body::before {
 }
 .marquee-item:hover .marquee-logo {
   opacity: 1;
+}
+/* logo s detaily: jen invert (bílý podklad značky + černé šipky) */
+.marquee-logo.inv {
+  filter: invert(1);
+  opacity: 0.6;
 }
 .marquee-item::after {
   content: '';
