@@ -21,7 +21,7 @@ export const translations = {
       scroll: 'Scrolujte',
     },
     marquee: {
-      label: 'Spolupráce',
+      label: 'Spolupracoval jsem s',
     },
     stats: [
       { num: '2+', label: 'roky za střihovým stolem' },
@@ -50,7 +50,7 @@ export const translations = {
       eyebrow: 'Co dělám',
       title: 'Služby',
       sub: 'Primárně střih a video editing — ale postarám se o video od nápadu až po finální export.',
-      hint: 'Klikni na lupu u služby a pustí se ti ukázka.',
+      hint: 'Klikněte na lupu u služby a pustí se vám ukázka.',
       items: [
         { n: '01', t: 'Střih videa', d: 'Jádro mojí práce. Tempo, rytmus, střihová skladba — tak, aby video fungovalo a udrželo diváka.' },
         { n: '02', t: 'Krátká vertikální videa', d: 'Reels, TikTok, YouTube Shorts. Dynamický střih a titulky, které nutí dívat se dál.' },
@@ -136,7 +136,7 @@ export const translations = {
       scroll: 'Scroll',
     },
     marquee: {
-      label: 'Trusted by',
+      label: 'Trusted by brands & creators',
     },
     stats: [
       { num: '2+', label: 'years at the editing desk' },

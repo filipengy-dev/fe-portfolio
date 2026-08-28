@@ -32,31 +32,32 @@ export default function Work() {
   return (
     <section className="section" id="work">
       <div className="container">
-        <div className="section-head" style={{ maxWidth: '100%' }}>
-          <div className="work-head">
-            <Reveal>
-              <span className="eyebrow">{w.eyebrow}</span>
-              <h2 className="section-title">{w.title}</h2>
-              <p className="section-sub">{w.sub}</p>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <div className="filters" role="tablist" aria-label="Filtr projektů">
-                {filters.map((f) => (
-                  <button
-                    key={f.id}
-                    className={`filter ${activeId === f.id ? 'active' : ''}`}
-                    onClick={() => setActiveId(f.id)}
-                    aria-pressed={activeId === f.id}
-                  >
-                    {f.label}
-                  </button>
-                ))}
-              </div>
-            </Reveal>
-          </div>
+        <div className="section-head center">
+          <Reveal>
+            <span className="eyebrow">{w.eyebrow}</span>
+            <h2 className="section-title">{w.title}</h2>
+            <p className="section-sub">{w.sub}</p>
+          </Reveal>
         </div>
 
-        <motion.div layout className="work-grid">
+        <Reveal delay={0.1}>
+          <div className="filters filters-center" role="tablist" aria-label="Filtr projektů">
+            {filters.map((f) => (
+              <button
+                key={f.id}
+                className={`filter ${activeId === f.id ? 'active' : ''}`}
+                onClick={() => setActiveId(f.id)}
+                aria-pressed={activeId === f.id}
+              >
+                {f.label}
+              </button>
+            ))}
+          </div>
+        </Reveal>
+
+        <div className="work-panel">
+          <span className="work-panel-glow" aria-hidden="true" />
+          <motion.div layout className="work-grid">
           <AnimatePresence mode="popLayout">
             {shown.map((p) => {
               const title = lang === 'cs' ? p.titleCs : p.titleEn
@@ -109,7 +110,8 @@ export default function Work() {
               )
             })}
           </AnimatePresence>
-        </motion.div>
+          </motion.div>
+        </div>
       </div>
 
       <AnimatePresence>

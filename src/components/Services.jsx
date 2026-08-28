@@ -30,7 +30,7 @@ export default function Services() {
   const [openProject, setOpenProject] = useState(null)
 
   return (
-    <section className="section" id="services" style={{ background: 'var(--bg-2)' }}>
+    <section className="section" id="services">
       <div className="container">
         <div className="services-top">
           <div className="section-head" style={{ marginBottom: 0 }}>

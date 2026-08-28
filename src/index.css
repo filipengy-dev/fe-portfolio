@@ -107,6 +107,25 @@ body::before {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
+/* ---------- CURSOR GLOW ---------- */
+.cursor-glow {
+  position: fixed;
+  top: -260px;
+  left: -260px;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.09), transparent 65%);
+  pointer-events: none;
+  z-index: 1;
+  mix-blend-mode: screen;
+}
+@media (hover: none) {
+  .cursor-glow {
+    display: none;
+  }
+}
+
 /* ---------- SCROLL PROGRESS ---------- */
 .scroll-progress {
   position: fixed;
@@ -134,6 +153,14 @@ body::before {
 .section-head {
   max-width: 720px;
   margin-bottom: clamp(40px, 6vw, 64px);
+}
+/* centrovaný úvod sekce (reference styl) */
+.section-head.center {
+  margin-inline: auto;
+  text-align: center;
+}
+.section-head.center .section-sub {
+  margin-inline: auto;
 }
 .eyebrow {
   display: inline-flex;
@@ -869,6 +896,15 @@ body::before {
 }
 
 /* ---------- MARQUEE (pás klientů) ---------- */
+.marquee-label {
+  text-align: center;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: 20px;
+}
 .marquee {
   border-top: 1px solid rgba(167, 139, 250, 0.16);
   border-bottom: 1px solid var(--border);
@@ -929,25 +965,23 @@ body::before {
   }
 }
 
-/* ---------- STATS ---------- */
+/* ---------- STATS (vzdušný pás čísel) ---------- */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 14px;
+  gap: 0;
 }
 .stat {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 34px 28px;
-  backdrop-filter: blur(6px);
-  transition: border-color 0.3s var(--ease), transform 0.3s var(--ease),
-    box-shadow 0.3s var(--ease);
+  text-align: center;
+  padding: 12px 24px;
+  border-right: 1px solid var(--border);
+  transition: transform 0.3s var(--ease);
+}
+.stat:last-child {
+  border-right: 0;
 }
 .stat:hover {
-  border-color: var(--border-strong);
-  transform: translateY(-4px);
-  box-shadow: var(--glow-shadow);
+  transform: translateY(-3px);
 }
 .stat-num {
   font-family: var(--font-display);
@@ -1155,65 +1189,60 @@ body::before {
 .services-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+  gap: 44px 36px;
 }
+/* minimální styl bez karet (reference) — ikona + titulek + text */
 .svc {
   position: relative;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 30px 26px 32px;
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(6px);
-  overflow: hidden;
-  transition: transform 0.35s var(--ease), border-color 0.35s var(--ease),
-    box-shadow 0.35s var(--ease);
+  padding: 4px 0 0;
+  transition: transform 0.35s var(--ease);
 }
 .svc:hover {
-  transform: translateY(-6px);
-  border-color: var(--border-strong);
-  box-shadow: var(--glow-shadow);
-}
-.svc.feature {
-  background: linear-gradient(150deg, rgba(124, 58, 237, 0.18), rgba(255, 255, 255, 0.03) 55%);
+  transform: translateY(-3px);
 }
 .svc-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 13px;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
   display: grid;
   place-items: center;
   background: rgba(139, 92, 246, 0.14);
   color: var(--violet-light);
   border: 1px solid rgba(139, 92, 246, 0.28);
+  transition: background 0.3s var(--ease), color 0.3s var(--ease),
+    transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+.svc:hover .svc-icon {
+  background: var(--accent-grad);
+  color: #fff;
+  transform: rotate(-6deg) scale(1.06);
+  box-shadow: 0 0 26px -4px var(--accent-glow);
 }
 .svc h3 {
   font-family: var(--font-display);
-  font-size: 1.16rem;
+  font-size: 1.12rem;
   font-weight: 600;
   letter-spacing: -0.01em;
-  margin-top: 20px;
+  margin-top: 18px;
 }
 .svc p {
   color: var(--muted);
-  font-size: 0.95rem;
-  margin-top: 10px;
-  padding-right: 26px;
+  font-size: 0.94rem;
+  margin-top: 8px;
 }
 .svc .num {
   position: absolute;
-  top: 22px;
-  right: 24px;
+  top: 0;
+  right: 0;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 0.85rem;
   color: var(--faint);
+  opacity: 0.55;
 }
 /* lupa = ukázkové video u služby */
 .svc-example {
-  position: absolute;
-  right: 20px;
-  bottom: 20px;
-  z-index: 2;
+  margin-top: 14px;
   width: 38px;
   height: 38px;
   border-radius: 50%;
@@ -1238,17 +1267,33 @@ body::before {
 }
 
 /* ---------- WORK ---------- */
-.work-head {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 24px;
-}
 .filters {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+}
+.filters-center {
+  justify-content: center;
+  margin-bottom: clamp(28px, 4vw, 40px);
+}
+/* velký zářící showcase panel (reference "dashboard") */
+.work-panel {
+  position: relative;
+  border: 1px solid var(--border-strong);
+  border-radius: 28px;
+  background: linear-gradient(180deg, rgba(23, 16, 40, 0.55), rgba(11, 7, 20, 0.85));
+  backdrop-filter: blur(8px);
+  padding: clamp(16px, 3vw, 32px);
+  box-shadow: 0 30px 90px -40px rgba(0, 0, 0, 0.8);
+}
+.work-panel-glow {
+  position: absolute;
+  inset: -70px 0 auto 0;
+  height: 320px;
+  z-index: -1;
+  background: radial-gradient(60% 100% at 50% 0%, rgba(124, 58, 237, 0.32), transparent 70%);
+  filter: blur(34px);
+  pointer-events: none;
 }
 .filter {
   padding: 9px 18px;
@@ -1273,8 +1318,7 @@ body::before {
 .work-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
-  margin-top: 44px;
+  gap: 16px;
 }
 .work-card {
   position: relative;
@@ -1386,55 +1430,77 @@ body::before {
   background: rgba(0, 0, 0, 0.3);
 }
 
-/* ---------- PROCESS ---------- */
+/* ---------- PROCESS (kroky na propojovací lince) ---------- */
 .process-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
+  gap: 24px;
+  position: relative;
+}
+/* linka propojující kroky */
+.process-grid::before {
+  content: '';
+  position: absolute;
+  top: 28px;
+  left: 4%;
+  right: 4%;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(139, 92, 246, 0.45) 15%,
+    rgba(139, 92, 246, 0.45) 85%,
+    transparent
+  );
 }
 .step {
   position: relative;
-  padding: 30px 26px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(6px);
-  transition: border-color 0.3s var(--ease), transform 0.3s var(--ease),
-    box-shadow 0.3s var(--ease);
+  padding: 0 8px;
+  text-align: center;
+  transition: transform 0.3s var(--ease);
 }
 .step:hover {
-  border-color: var(--border-strong);
   transform: translateY(-4px);
-  box-shadow: var(--glow-shadow);
 }
 .step-num {
+  position: relative;
+  z-index: 1;
+  width: 56px;
+  height: 56px;
+  margin-inline: auto;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--surface-2);
+  border: 1px solid var(--border-strong);
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 2.4rem;
-  line-height: 1;
-  background: var(--accent-grad);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  font-size: 1.15rem;
+  box-shadow: 0 0 28px -6px var(--accent-glow);
+  transition: box-shadow 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+.step-num {
+  color: var(--violet-light);
+}
+.step:hover .step-num {
+  border-color: var(--violet-light);
+  box-shadow: 0 0 40px -4px var(--accent-glow);
 }
 .step h3 {
   font-family: var(--font-display);
   font-size: 1.1rem;
   font-weight: 600;
   letter-spacing: -0.01em;
-  margin-top: 18px;
+  margin-top: 20px;
 }
 .step p {
   color: var(--muted);
-  font-size: 0.94rem;
+  font-size: 0.92rem;
   margin-top: 10px;
 }
 .step-line {
-  position: absolute;
-  top: 44px;
-  right: -8px;
-  color: var(--faint);
-  z-index: 1;
+  display: none;
 }
 
 /* ---------- CONTACT ---------- */
@@ -1851,14 +1917,21 @@ body::before {
   .process-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+  .process-grid {
+    gap: 36px 24px;
+  }
+  .process-grid::before {
+    display: none;
+  }
   .work-grid {
     grid-template-columns: repeat(2, 1fr);
   }
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 24px 0;
   }
-  .step-line {
-    display: none;
+  .stat:nth-child(2n) {
+    border-right: 0;
   }
   .nav-links {
     display: none;
@@ -1898,6 +1971,17 @@ body::before {
   .process-grid,
   .stats-grid {
     grid-template-columns: 1fr;
+  }
+  .stat {
+    border-right: 0;
+    border-bottom: 1px solid var(--border);
+    padding-block: 20px;
+  }
+  .stat:last-child {
+    border-bottom: 0;
+  }
+  .services-grid {
+    gap: 34px;
   }
   /* svislá videa 2 vedle sebe, široká přes celou šířku */
   .work-grid {

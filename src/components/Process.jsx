@@ -6,9 +6,9 @@ export default function Process() {
   const { t } = useLang()
   const p = t.process
   return (
-    <section className="section" id="process" style={{ background: 'var(--bg-2)' }}>
+    <section className="section" id="process">
       <div className="container">
-        <div className="section-head">
+        <div className="section-head center">
           <Reveal>
             <span className="eyebrow">{p.eyebrow}</span>
             <h2 className="section-title" style={{ whiteSpace: 'pre-line' }}>
