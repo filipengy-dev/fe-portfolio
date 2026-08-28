@@ -740,12 +740,15 @@ body::before {
   border-radius: 12px;
 }
 
-/* 3D timeline */
-.timeline {
+/* 3D timeline (obal řeší pozici + scroll parallax, panel drží 3D náklon) */
+.tl-wrap {
   position: absolute;
   left: -12%;
   right: -18%;
   bottom: 5%;
+}
+.timeline {
+  position: relative;
   transform: perspective(1100px) rotateX(50deg) rotateZ(-9deg);
   background: linear-gradient(180deg, rgba(23, 16, 40, 0.92), rgba(11, 7, 20, 0.96));
   border: 1px solid rgba(167, 139, 250, 0.26);
@@ -1821,7 +1824,7 @@ body::before {
   .scene {
     height: 480px;
   }
-  .timeline {
+  .tl-wrap {
     left: -6%;
     right: -10%;
   }
