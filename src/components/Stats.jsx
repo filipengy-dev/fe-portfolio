@@ -97,10 +97,6 @@ export default function Stats() {
                         id="views"
                         points={[[0, 78], [45, 60], [85, 68], [125, 46], [165, 54], [205, 28], [245, 38], [300, 12]]}
                       />
-                      <span className="mac-tip" style={{ left: '62%', top: '18%' }}>
-                        <i />
-                        {d.tooltip}
-                      </span>
                     </div>
                   </div>
 
