@@ -4,13 +4,13 @@ export default function LogoMark({ className = 'logo-mark' }) {
     <svg className={className} viewBox="0 0 48 48" role="img" aria-label="Filip Engelhart">
       <defs>
         <linearGradient id="fe-grad" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#ff7a18" />
-          <stop offset="1" stopColor="#f5c451" />
+          <stop offset="0" stopColor="#8b5cf6" />
+          <stop offset="1" stopColor="#c4b5fd" />
         </linearGradient>
       </defs>
 
       {/* podklad + gradientový rámeček */}
-      <rect x="1" y="1" width="46" height="46" rx="12" fill="#0e0e10" />
+      <rect x="1" y="1" width="46" height="46" rx="12" fill="#100a1d" />
       <rect
         x="1.75"
         y="1.75"
@@ -36,18 +36,18 @@ export default function LogoMark({ className = 'logo-mark' }) {
 
       {/* nůžky — tmavá aura pro odečtení přes pás, pak gradient */}
       <g fill="none" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M19.8 15.8 L24 23 L31 34" stroke="#0e0e10" strokeWidth="3.6" />
-        <path d="M28.2 15.8 L24 23 L17 34" stroke="#0e0e10" strokeWidth="3.6" />
+        <path d="M19.8 15.8 L24 23 L31 34" stroke="#100a1d" strokeWidth="3.6" />
+        <path d="M28.2 15.8 L24 23 L17 34" stroke="#100a1d" strokeWidth="3.6" />
         <path d="M19.8 15.8 L24 23 L31 34" stroke="url(#fe-grad)" strokeWidth="1.8" />
         <path d="M28.2 15.8 L24 23 L17 34" stroke="url(#fe-grad)" strokeWidth="1.8" />
       </g>
 
       {/* rukojeti + čep */}
-      <g fill="#0e0e10" stroke="url(#fe-grad)" strokeWidth="1.8">
+      <g fill="#100a1d" stroke="url(#fe-grad)" strokeWidth="1.8">
         <circle cx="17.5" cy="13.5" r="3.3" />
         <circle cx="30.5" cy="13.5" r="3.3" />
       </g>
-      <circle cx="24" cy="23" r="1.5" fill="#f5c451" />
+      <circle cx="24" cy="23" r="1.5" fill="#c4b5fd" />
     </svg>
   )
 }

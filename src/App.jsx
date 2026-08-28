@@ -1,4 +1,5 @@
 import Navbar from './components/Navbar.jsx'
+import ScrollProgress from './components/ScrollProgress.jsx'
 import Hero from './components/Hero.jsx'
 import Marquee from './components/Marquee.jsx'
 import Stats from './components/Stats.jsx'
@@ -12,6 +13,7 @@ import Footer from './components/Footer.jsx'
 export default function App() {
   return (
     <>
+      <ScrollProgress />
       <Navbar />
       <main>
         <Hero />
