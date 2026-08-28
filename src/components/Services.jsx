@@ -1,10 +1,10 @@
 import { useState } from 'react'
-import { AnimatePresence } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { useLang } from '../i18n/LanguageContext.jsx'
 import { projects } from '../data/projects.js'
 import Reveal from './Reveal.jsx'
 import VideoModal from './VideoModal.jsx'
-import { Scissors, Play, Sparkle, Check, Ai, Search } from './icons.jsx'
+import { Scissors, Play, Sparkle, Check, Ai, Search, Arrow } from './icons.jsx'
 
 // jednoduché přiřazení ikon ke kartám služeb
 const icons = [Scissors, Play, Play, Sparkle, Check, Sparkle, Play, Sparkle, Ai]
@@ -28,6 +28,18 @@ export default function Services() {
   const { t } = useLang()
   const s = t.services
   const [openProject, setOpenProject] = useState(null)
+  const [idx, setIdx] = useState(0)
+
+  const items = s.items
+  const n = items.length
+  const half = 2 // 5 viditelných karet
+  // nejkratší vzdálenost po kruhu (wrap)
+  const rel = (i) => {
+    let d = (i - idx) % n
+    if (d > n / 2) d -= n
+    if (d < -n / 2) d += n
+    return d
+  }
 
   return (
     <section className="section" id="services">
@@ -51,31 +63,86 @@ export default function Services() {
           {s.hint}
         </Reveal>
 
-        <div className="services-grid">
-          {s.items.map((item, i) => {
-            const Icon = icons[i] || Sparkle
-            const example = findProject(exampleIds[i])
-            return (
-              <Reveal className={`svc ${i === 0 ? 'feature' : ''}`} key={item.n} delay={(i % 3) * 0.08}>
-                <span className="num">{item.n}</span>
-                <div className="svc-icon">
-                  <Icon size={22} />
-                </div>
-                <h3>{item.t}</h3>
-                <p>{item.d}</p>
-                {example && (
-                  <button
-                    className="svc-example"
-                    onClick={() => setOpenProject(example)}
-                    aria-label={`Zobrazit ukázku: ${item.t}`}
+        <Reveal delay={0.08}>
+          <div className="ring-wrap svc-ringwrap">
+            <div className="ring">
+              {items.map((item, i) => {
+                const off = rel(i)
+                const abs = Math.abs(off)
+                const hidden = abs > half
+                const Icon = icons[i] || Sparkle
+                const example = findProject(exampleIds[i])
+                return (
+                  <motion.div
+                    key={item.n}
+                    className="ring-item"
+                    data-abs={abs}
+                    style={{ zIndex: 10 - abs, pointerEvents: hidden ? 'none' : 'auto' }}
+                    animate={{
+                      x: `${off * 74}%`,
+                      scale: hidden ? 0.6 : 1 - abs * 0.14,
+                      opacity: hidden ? 0 : off === 0 ? 1 : 0.45,
+                      rotateY: off * -9,
+                    }}
+                    transition={{ type: 'spring', stiffness: 210, damping: 28 }}
                   >
-                    <Search size={17} />
-                  </button>
-                )}
-              </Reveal>
-            )
-          })}
-        </div>
+                    <article
+                      className="svc svc-ring-card"
+                      onClick={() => off !== 0 && setIdx(i)}
+                      role={off !== 0 ? 'button' : undefined}
+                      tabIndex={hidden ? -1 : 0}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault()
+                          if (off !== 0) setIdx(i)
+                          else if (example) setOpenProject(example)
+                        }
+                      }}
+                      aria-label={off !== 0 ? `Otočit na: ${item.t}` : item.t}
+                    >
+                      <span className="num">{item.n}</span>
+                      <div className="svc-icon">
+                        <Icon size={22} />
+                      </div>
+                      <h3>{item.t}</h3>
+                      <p>{item.d}</p>
+                      {example && (
+                        <button
+                          className="svc-example"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setOpenProject(example)
+                          }}
+                          aria-label={`Zobrazit ukázku: ${item.t}`}
+                          tabIndex={off === 0 ? 0 : -1}
+                        >
+                          <Search size={17} />
+                        </button>
+                      )}
+                    </article>
+                  </motion.div>
+                )
+              })}
+            </div>
+
+            <button
+              className="ring-arrow prev"
+              onClick={() => setIdx((idx - 1 + n) % n)}
+              aria-label="Předchozí služba"
+            >
+              <span style={{ display: 'inline-flex', transform: 'rotate(180deg)' }}>
+                <Arrow size={20} />
+              </span>
+            </button>
+            <button
+              className="ring-arrow next"
+              onClick={() => setIdx((idx + 1) % n)}
+              aria-label="Další služba"
+            >
+              <Arrow size={20} />
+            </button>
+          </div>
+        </Reveal>
       </div>
 
       <AnimatePresence>

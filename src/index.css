@@ -1175,12 +1175,14 @@ body::before {
   color: var(--violet-light);
 }
 .svc-hint {
-  display: inline-flex;
+  display: flex;
+  justify-content: center;
   align-items: center;
   gap: 9px;
-  margin-bottom: 26px;
+  margin-bottom: 30px;
   font-size: 0.9rem;
   color: var(--muted);
+  text-align: center;
 }
 .svc-hint svg {
   color: var(--violet-light);
@@ -1240,6 +1242,43 @@ body::before {
   color: var(--faint);
   opacity: 0.55;
 }
+/* ---- prstenec služeb ---- */
+.svc-ring-card {
+  width: min(340px, 74vw);
+  min-height: 332px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 28px 26px 24px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(8px);
+  overflow: hidden;
+  transition: border-color 0.3s var(--ease), box-shadow 0.3s var(--ease),
+    background 0.3s var(--ease);
+}
+/* prostřední karta = zvýrazněná */
+.ring-item[data-abs='0'] .svc-ring-card {
+  border-color: var(--border-strong);
+  background: linear-gradient(150deg, rgba(124, 58, 237, 0.16), rgba(255, 255, 255, 0.04) 55%);
+  box-shadow: var(--glow-shadow);
+}
+.svc-ring-card .num {
+  top: 22px;
+  right: 24px;
+}
+.svc-ring-card .svc-example {
+  margin-top: auto;
+}
+/* lupa klikatelná jen na prostřední kartě (boční klik otáčí prstenec) */
+.ring-item:not([data-abs='0']) .svc-example {
+  pointer-events: none;
+}
+.svc-ringwrap {
+  padding-block: 8px;
+}
+
 /* lupa = ukázkové video u služby */
 .svc-example {
   margin-top: 14px;
