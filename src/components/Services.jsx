@@ -42,19 +42,19 @@ export default function Services() {
   }
 
   return (
-    <section className="section" id="services">
-      <div className="container">
-        <div className="services-top">
-          <div className="section-head" style={{ marginBottom: 0 }}>
-            <Reveal>
-              <span className="eyebrow">{s.eyebrow}</span>
-              <h2 className="section-title">{s.title}</h2>
-              <p className="section-sub">{s.sub}</p>
-            </Reveal>
-          </div>
-          <Reveal delay={0.12} className="services-photo">
-            <img src="/photos/IMG_6783.PNG" alt="Filip Engelhart při focení" loading="lazy" />
-            <span className="services-photo-tag">In the field</span>
+    <section className="section services-section" id="services">
+      {/* fotka jako atmosférická vrstva vpravo — částečně za textem i kartami */}
+      <div className="services-photo" aria-hidden="true">
+        <img src="/photos/IMG_6783.PNG" alt="" loading="lazy" />
+        <span className="services-photo-tag">In the field</span>
+      </div>
+
+      <div className="container services-content">
+        <div className="section-head center">
+          <Reveal>
+            <span className="eyebrow">{s.eyebrow}</span>
+            <h2 className="section-title">{s.title}</h2>
+            <p className="section-sub">{s.sub}</p>
           </Reveal>
         </div>
 
