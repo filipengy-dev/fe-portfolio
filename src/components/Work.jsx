@@ -30,7 +30,11 @@ function Ring({ items, visible, title, lang, catLabel, onOpen }) {
   const n = items.length
   if (n === 0) return null
 
-  const half = Math.floor(visible / 2)
+  // Svislá karta je úzká, vejde se jich do vějíře pět. Vodorovná má
+  // až 620 px, takže se drží tří, jinak by krajní vylezly ze stránky.
+  const allVertical = items.every((p) => p.vertical)
+  const shownCount = visible ?? (allVertical ? 5 : 3)
+  const half = Math.floor(shownCount / 2)
   // nejkratší vzdálenost po kruhu (wrap)
   const rel = (i) => {
     let d = (i - idx) % n
@@ -38,7 +42,7 @@ function Ring({ items, visible, title, lang, catLabel, onOpen }) {
     if (d < -n / 2) d += n
     return d
   }
-  const ringClass = items.every((p) => p.vertical) ? 'ring--vertical' : 'ring--wide'
+  const ringClass = allVertical ? 'ring--vertical' : 'ring--wide'
 
   return (
     <div className="ring-block">
@@ -186,11 +190,11 @@ export default function Work() {
             >
               {activeId === 'all' ? (
                 <>
-                  <Ring items={wide} visible={3} title={w.featuredLabel} {...ringProps} />
-                  <Ring items={verts} visible={5} title={w.reelsLabel} {...ringProps} />
+                  <Ring items={wide} title={w.featuredLabel} {...ringProps} />
+                  <Ring items={verts} title={w.reelsLabel} {...ringProps} />
                 </>
               ) : (
-                <Ring items={shown} visible={3} title={null} {...ringProps} />
+                <Ring items={shown} title={null} {...ringProps} />
               )}
             </motion.div>
           </AnimatePresence>
