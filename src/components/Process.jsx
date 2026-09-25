@@ -6,7 +6,7 @@ export default function Process() {
   const { t } = useLang()
   const p = t.process
   return (
-    <section className="section" id="process">
+    <div className="process-block" id="process">
       <div className="container">
         <div className="section-head center">
           <Reveal>
@@ -32,6 +32,6 @@ export default function Process() {
           ))}
         </div>
       </div>
-    </section>
+    </div>
   )
 }

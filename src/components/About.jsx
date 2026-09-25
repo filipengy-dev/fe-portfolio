@@ -44,6 +44,15 @@ export default function About() {
             </span>
           </div>
 
+          {/* druhý snímek „v terénu"; duotone do fialové, aby ladil s portrétem */}
+          <figure className="about-field">
+            <img src="/photos/IMG_6783.PNG" alt={a.fieldAlt} loading="lazy" />
+            <figcaption className="about-field-tag">
+              <i />
+              {a.fieldTag}
+            </figcaption>
+          </figure>
+
           <div className="about-glass">
             <span className="mono">{a.cardMono}</span>
             <ul>

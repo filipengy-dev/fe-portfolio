@@ -588,8 +588,24 @@ body::before {
   gap: 14px;
   margin-top: 36px;
 }
+.hero-free {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 20px;
+  font-size: 0.92rem;
+  color: var(--violet-light);
+}
+.hero-free svg {
+  flex: none;
+  padding: 3px;
+  border-radius: 50%;
+  background: rgba(139, 92, 246, 0.18);
+  border: 1px solid rgba(139, 92, 246, 0.35);
+  box-sizing: content-box;
+}
 .hero-role {
-  margin-top: 32px;
+  margin-top: 24px;
   font-size: 0.78rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -971,6 +987,7 @@ body::before {
 /* ---------- STATS — macOS dashboard okno ---------- */
 .macwin {
   max-width: 980px;
+  transition: max-width 0.55s var(--ease);
   margin-inline: auto;
   border: 1px solid var(--border-strong);
   border-radius: 18px;
@@ -991,10 +1008,26 @@ body::before {
   display: inline-flex;
   gap: 7px;
 }
-.mac-dots i {
+.mac-dots button {
   width: 12px;
   height: 12px;
   border-radius: 50%;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  transition: filter 0.2s var(--ease), transform 0.2s var(--ease);
+}
+.mac-dots button:hover:not(:disabled) {
+  filter: brightness(1.25);
+  transform: scale(1.14);
+}
+.mac-dots button:disabled {
+  cursor: default;
+  opacity: 0.55;
+}
+.mac-dots button:focus-visible {
+  outline: 2px solid var(--violet-light);
+  outline-offset: 2px;
 }
 .d-red {
   background: #ff5f57;
@@ -1013,17 +1046,6 @@ body::before {
   color: var(--muted);
   letter-spacing: 0.02em;
 }
-.mac-search {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  padding: 5px 12px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.03);
-  font-size: 0.7rem;
-  color: var(--faint);
-}
 .mac-body {
   display: grid;
   grid-template-columns: 208px 1fr;
@@ -1039,11 +1061,39 @@ body::before {
   display: flex;
   align-items: center;
   gap: 10px;
+  width: 100%;
   padding: 8px 12px;
   border-radius: 9px;
+  font: inherit;
   font-size: 0.8rem;
+  text-align: left;
   color: var(--muted);
+  background: none;
   border: 1px solid transparent;
+  cursor: pointer;
+  transition: background 0.25s var(--ease), color 0.25s var(--ease),
+    border-color 0.25s var(--ease);
+}
+.mac-side-item:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--fg);
+}
+.mac-side-item:focus-visible {
+  outline: 2px solid var(--violet-light);
+  outline-offset: -1px;
+}
+.mac-side-count {
+  margin-left: auto;
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--faint);
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  padding: 1px 7px;
+}
+.mac-side-item.active .mac-side-count {
+  color: var(--violet-light);
+  background: rgba(139, 92, 246, 0.2);
 }
 .mac-side-item.active {
   background: rgba(139, 92, 246, 0.12);
@@ -1061,6 +1111,10 @@ body::before {
 .mac-main {
   padding: 16px 18px 20px;
   min-width: 0;
+}
+/* obal, kterému se animuje výška při přepnutí pohledu */
+.mac-viewport {
+  overflow: hidden;
 }
 .mac-toolbar {
   display: flex;
@@ -1099,6 +1153,22 @@ body::before {
 .mac-card.wide {
   grid-column: 1 / -1;
 }
+/* textový odkaz „Všichni klienti →" na kartě přehledu */
+.mac-linkbtn {
+  display: block;
+  margin-top: 16px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 0.74rem;
+  color: var(--faint);
+  cursor: pointer;
+  transition: color 0.25s var(--ease);
+}
+.mac-linkbtn:hover {
+  color: var(--violet-light);
+}
 .mac-label {
   display: block;
   font-size: 0.72rem;
@@ -1131,11 +1201,28 @@ body::before {
 .mac-chartwrap {
   position: relative;
   margin-top: 14px;
+  touch-action: pan-y;
 }
 .mac-chart {
   width: 100%;
-  height: auto;
+  height: 100%;
   display: block;
+  overflow: visible;
+}
+.mac-dot {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  margin: -5px 0 0 -5px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.45), 0 0 16px var(--violet);
+  pointer-events: none;
+}
+.mac-note {
+  margin-top: 12px;
+  font-size: 0.72rem;
+  color: var(--faint);
 }
 .mac-tip {
   position: absolute;
@@ -1157,6 +1244,16 @@ body::before {
   border-radius: 50%;
   background: var(--violet-light);
   box-shadow: 0 0 8px var(--violet);
+  flex: none;
+}
+.mac-tip b {
+  color: var(--fg);
+  font-weight: 700;
+}
+.mac-tip em {
+  font-style: normal;
+  color: var(--faint);
+  margin-left: 4px;
 }
 .mac-list {
   list-style: none;
@@ -1171,6 +1268,295 @@ body::before {
   align-items: center;
   gap: 9px;
   font-size: 0.8rem;
+  color: var(--muted);
+}
+
+/* ---- klienti v okně ---- */
+.mac-clients {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 10px;
+}
+.mac-client {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 74px;
+  padding: 18px 14px;
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.025);
+  transition: border-color 0.3s var(--ease), background 0.3s var(--ease),
+    transform 0.3s var(--ease);
+}
+.mac-client img {
+  height: 30px;
+  max-width: 100%;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.8;
+  transition: opacity 0.3s var(--ease);
+}
+.mac-client img.inv {
+  filter: invert(1);
+}
+/* dlaždice s vyplněnou adresou se chová jako odkaz */
+.mac-client.is-link {
+  cursor: pointer;
+}
+.mac-client.is-link:hover {
+  border-color: var(--border-strong);
+  background: rgba(139, 92, 246, 0.1);
+  transform: translateY(-2px);
+}
+.mac-client.is-link:hover img {
+  opacity: 1;
+}
+.mac-client.is-link:focus-visible {
+  outline: 2px solid var(--violet-light);
+  outline-offset: 2px;
+}
+.mac-client-name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 9px;
+  font-style: normal;
+  font-size: 0.7rem;
+  color: var(--faint);
+  letter-spacing: 0.04em;
+  text-align: center;
+}
+.mac-client-go {
+  color: var(--violet-light);
+  opacity: 0.75;
+}
+.mac-logo-text {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+  color: var(--fg);
+  opacity: 0.85;
+  text-align: center;
+}
+
+/* ---- stavy okna (zelený / žlutý puntík) ---- */
+.macwin.is-zoom {
+  max-width: var(--container);
+}
+.macwin.is-collapsed .mac-body {
+  display: none;
+}
+.macwin.is-collapsed .mac-titlebar {
+  border-bottom: 0;
+  cursor: pointer;
+}
+
+/* ---------- RECENZE ---------- */
+.rev-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 18px;
+}
+.rev-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 30px 28px 24px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: linear-gradient(150deg, rgba(36, 24, 62, 0.6), rgba(17, 11, 31, 0.6));
+  transition: border-color 0.35s var(--ease), transform 0.35s var(--ease),
+    box-shadow 0.35s var(--ease);
+}
+.rev-card:hover {
+  border-color: var(--border-strong);
+  transform: translateY(-3px);
+  box-shadow: var(--glow-shadow);
+}
+.rev-mark {
+  position: absolute;
+  z-index: 0;
+  top: 10px;
+  right: 22px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 3.6rem;
+  line-height: 1;
+  color: var(--violet);
+  opacity: 0.2;
+  pointer-events: none;
+}
+/* obal se zabalenou výškou; maska odstupňuje text místo barevného překryvu,
+   takže nezáleží na tom, jakou barvu má pod ním karta */
+.rev-body {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+.rev-body.is-clamped {
+  -webkit-mask-image: linear-gradient(to bottom, #000 62%, transparent 98%);
+  mask-image: linear-gradient(to bottom, #000 62%, transparent 98%);
+}
+.rev-text {
+  font-size: 0.98rem;
+  line-height: 1.68;
+  color: var(--fg);
+}
+.rev-text p + p {
+  margin-top: 14px;
+}
+.rev-more {
+  align-self: flex-start;
+  margin-top: 14px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--violet-light);
+  cursor: pointer;
+  transition: color 0.25s var(--ease);
+}
+.rev-more:hover {
+  color: #fff;
+}
+.rev-more:focus-visible {
+  outline: 2px solid var(--violet-light);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+/* podpis drží u spodní hrany, ať různě dlouhé recenze vedle sebe sedí */
+.rev-author {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  margin-top: auto;
+  padding-top: 22px;
+  border-top: 1px solid var(--border);
+}
+.rev-logo {
+  height: 22px;
+  max-width: 84px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.7;
+}
+.rev-initial {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--accent-grad);
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: #fff;
+}
+.rev-who {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.rev-who strong {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.rev-who em {
+  font-style: normal;
+  font-size: 0.78rem;
+  color: var(--faint);
+}
+.rev-vidlabel {
+  margin: clamp(38px, 5vw, 58px) 0 20px;
+  text-align: center;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+.rev-videos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 16px;
+}
+.rev-video {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+  cursor: pointer;
+  transition: border-color 0.35s var(--ease), transform 0.35s var(--ease),
+    box-shadow 0.35s var(--ease);
+}
+.rev-video.vertical {
+  aspect-ratio: 9 / 14;
+}
+.rev-video:hover {
+  border-color: var(--border-strong);
+  transform: translateY(-3px);
+  box-shadow: var(--glow-shadow);
+}
+.rev-video:focus-visible {
+  outline: 2px solid var(--violet-light);
+  outline-offset: 2px;
+}
+.rev-video img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.8;
+  transition: opacity 0.35s var(--ease), transform 0.5s var(--ease);
+}
+.rev-video:hover img {
+  opacity: 1;
+  transform: scale(1.04);
+}
+.rev-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(16, 10, 29, 0.72);
+  border: 1px solid var(--border-strong);
+  color: #fff;
+}
+.rev-vidwho {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 26px 18px 16px;
+  text-align: left;
+  background: linear-gradient(180deg, transparent, rgba(7, 4, 13, 0.92));
+}
+.rev-vidwho strong {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--fg);
+}
+.rev-vidwho em {
+  font-style: normal;
+  font-size: 0.75rem;
   color: var(--muted);
 }
 
@@ -1241,7 +1627,8 @@ body::before {
   aspect-ratio: 1;
   height: auto;
   object-fit: cover;
-  object-position: 60% 38%;
+  /* zdroj je čtvercový výřez, kruh tedy sedí bez dalšího posouvání */
+  object-position: center;
   border-radius: 50%;
   filter: grayscale(0.14) contrast(1.05) brightness(0.97) saturate(1.05);
 }
@@ -1277,9 +1664,55 @@ body::before {
   border-radius: 50%;
   background: var(--accent-grad);
 }
+/* druhý snímek pod portrétem, stejná úprava jako portrét, ať dvojice ladí */
+.about-field {
+  position: relative;
+  width: min(360px, 82%);
+  margin: 26px 0 0;
+  aspect-ratio: 16 / 11;
+  border-radius: 18px;
+  overflow: hidden;
+  isolation: isolate;
+  box-shadow: 0 30px 70px -28px rgba(0, 0, 0, 0.8);
+}
+.about-field img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 44% 37%;
+  filter: grayscale(0.18) contrast(1.07) brightness(0.88) saturate(1.02);
+}
+.about-field::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(120% 120% at 72% 14%, rgba(139, 92, 246, 0.22), transparent 56%),
+    linear-gradient(180deg, transparent 44%, rgba(7, 4, 13, 0.82));
+  box-shadow: inset 0 0 0 1px rgba(167, 139, 250, 0.22);
+}
+.about-field-tag {
+  position: absolute;
+  left: 18px;
+  bottom: 15px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--violet-light);
+}
+.about-field-tag i {
+  width: 22px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.6;
+}
 .about-glass {
   width: 100%;
-  margin-top: 30px;
+  margin-top: 26px;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background: rgba(255, 255, 255, 0.03);
@@ -1321,50 +1754,6 @@ body::before {
 .services-content {
   position: relative;
   z-index: 1;
-}
-.services-photo {
-  position: absolute;
-  z-index: 0;
-  top: clamp(40px, 7vw, 96px);
-  right: max(-40px, -3vw);
-  width: min(420px, 34vw);
-  aspect-ratio: 3 / 4.4;
-  border-radius: 22px;
-  overflow: hidden;
-  pointer-events: none;
-  /* změkčení do pozadí — vlevo i dole se rozplyne */
-  -webkit-mask-image: linear-gradient(to left, #000 42%, transparent 96%),
-    linear-gradient(to top, transparent 2%, #000 34%);
-  mask-image: linear-gradient(to left, #000 42%, transparent 96%),
-    linear-gradient(to top, transparent 2%, #000 34%);
-  -webkit-mask-composite: source-in;
-  mask-composite: intersect;
-}
-.services-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 46% 30%;
-  filter: grayscale(0.25) contrast(1.05) brightness(0.72) saturate(0.9);
-  opacity: 0.62;
-}
-.services-photo::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(7, 4, 13, 0.1) 30%, rgba(7, 4, 13, 0.85)),
-    radial-gradient(120% 80% at 78% 6%, rgba(139, 92, 246, 0.3), transparent 60%);
-}
-.services-photo-tag {
-  position: absolute;
-  left: 22px;
-  bottom: 20px;
-  z-index: 1;
-  font-size: 0.7rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--violet-light);
-  opacity: 0.75;
 }
 .svc-hint {
   display: flex;
@@ -1444,16 +1833,20 @@ body::before {
   padding: 28px 26px 24px;
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  background: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(8px);
+  /* Neprůhledný podklad místo backdrop-filtru.
+     backdrop-filter se při transformaci prstence přepínal skokem
+     (průhledná karta -> náhlé probliknutí do bluru), proto je pryč.
+     Rozostření bočních karet teď dělá `filter` přímo v Services.jsx,
+     takže jede po stejné časové ose jako posun. */
+  background: linear-gradient(150deg, rgba(36, 24, 62, 0.94), rgba(17, 11, 31, 0.96));
   overflow: hidden;
-  transition: border-color 0.3s var(--ease), box-shadow 0.3s var(--ease),
-    background 0.3s var(--ease);
+  transition: border-color 0.62s var(--ease), box-shadow 0.62s var(--ease),
+    background 0.62s var(--ease);
 }
-/* prostřední karta = zvýrazněná */
+/* prostřední karta = zvýrazněná (stejné trvání i křivka jako posun prstence) */
 .ring-item[data-abs='0'] .svc-ring-card {
   border-color: var(--border-strong);
-  background: linear-gradient(150deg, rgba(124, 58, 237, 0.16), rgba(255, 255, 255, 0.04) 55%);
+  background: linear-gradient(150deg, rgba(88, 48, 160, 0.96), rgba(24, 15, 44, 0.97) 58%);
   box-shadow: var(--glow-shadow);
 }
 .svc-ring-card .num {
@@ -1480,9 +1873,8 @@ body::before {
   display: grid;
   place-items: center;
   color: var(--muted);
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.07);
   border: 1px solid var(--border-strong);
-  backdrop-filter: blur(4px);
   transition: color 0.25s var(--ease), background 0.25s var(--ease),
     border-color 0.25s var(--ease), transform 0.25s var(--ease);
 }
@@ -1724,17 +2116,25 @@ body::before {
   color: var(--violet-light);
   margin-bottom: 4px;
 }
-.work-badge {
-  font-size: 0.68rem;
-  padding: 5px 10px;
-  border-radius: 100px;
-  border: 1px solid var(--border-strong);
-  color: var(--muted);
-  white-space: nowrap;
-  background: rgba(0, 0, 0, 0.3);
+/* ---------- PROCESS (kroky na propojovací lince) ---------- */
+/* Postup je spodní polovina sekce Služby, oddělená jemnou linkou. */
+.process-block {
+  position: relative;
+  z-index: 1;
+  margin-top: clamp(64px, 8vw, 110px);
+  padding-top: clamp(56px, 7vw, 96px);
+}
+.process-block::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(1100px, 86%);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(167, 139, 250, 0.3), transparent);
 }
 
-/* ---------- PROCESS (kroky na propojovací lince) ---------- */
 .process-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -2204,20 +2604,11 @@ body::before {
   .contact-inner {
     grid-template-columns: 1fr;
   }
-  /* fotka jen jako jemná kulisa v rohu */
-  .services-photo {
-    width: min(300px, 46vw);
-    top: 24px;
-    right: -30px;
-  }
-  .services-photo img {
-    object-position: 46% 26%;
-    opacity: 0.4;
-  }
-  .services-photo-tag {
-    display: none;
-  }
   .portrait {
+    width: min(320px, 70%);
+  }
+  /* fotka v terénu drží stejnou šířku jako portrét nad ní */
+  .about-field {
     width: min(320px, 70%);
   }
   .services-grid,
@@ -2233,15 +2624,33 @@ body::before {
   .work-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  /* mac okno: bez bočního menu, karty pod sebe */
+  /* mac okno: menu se překlopí na vodorovný pruh záložek nad obsah */
   .mac-body {
     grid-template-columns: 1fr;
   }
   .mac-side {
+    flex-direction: row;
+    border-right: 0;
+    border-bottom: 1px solid var(--border);
+    padding: 10px;
+    gap: 6px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .mac-side::-webkit-scrollbar {
     display: none;
   }
-  .mac-search {
+  .mac-side-item {
+    width: auto;
+    flex: none;
+    white-space: nowrap;
+    border-color: var(--border);
+  }
+  .mac-side-item .msdot {
     display: none;
+  }
+  .mac-side-count {
+    margin-left: 6px;
   }
   .mac-grid {
     grid-template-columns: 1fr;
@@ -2291,10 +2700,6 @@ body::before {
   }
   .services-grid {
     gap: 34px;
-  }
-  /* na mobilu kulisu vypnout, ať text zůstane čitelný */
-  .services-photo {
-    display: none;
   }
   /* svislá videa 2 vedle sebe, široká přes celou šířku */
   .work-grid {

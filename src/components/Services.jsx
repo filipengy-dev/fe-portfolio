@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { useLang } from '../i18n/LanguageContext.jsx'
 import { projects } from '../data/projects.js'
 import Reveal from './Reveal.jsx'
+import Process from './Process.jsx'
 import VideoModal from './VideoModal.jsx'
 import { Scissors, Play, Sparkle, Check, Ai, Search, Arrow } from './icons.jsx'
 
@@ -43,11 +44,6 @@ export default function Services() {
 
   return (
     <section className="section services-section" id="services">
-      {/* fotka jako atmosférická vrstva vpravo — částečně za textem i kartami */}
-      <div className="services-photo" aria-hidden="true">
-        <img src="/photos/IMG_6783.PNG" alt="" loading="lazy" />
-        <span className="services-photo-tag">In the field</span>
-      </div>
 
       <div className="container services-content">
         <div className="section-head center">
@@ -81,10 +77,14 @@ export default function Services() {
                     animate={{
                       x: `${off * 74}%`,
                       scale: hidden ? 0.6 : 1 - abs * 0.14,
-                      opacity: hidden ? 0 : off === 0 ? 1 : 0.45,
+                      opacity: hidden ? 0 : off === 0 ? 1 : 0.5,
                       rotateY: off * -9,
+                      // rozostření boční karty řeší filtr na samotné kartě.
+                      // backdrop-filter tady problikával: při transformaci
+                      // se přepínal kompozitní režim a blur naskočil skokem.
+                      filter: `blur(${hidden ? 7 : abs * 1.9}px)`,
                     }}
-                    transition={{ type: 'spring', stiffness: 210, damping: 28 }}
+                    transition={{ duration: 0.62, ease: [0.16, 1, 0.3, 1] }}
                   >
                     <article
                       className="svc svc-ring-card"
@@ -144,6 +144,9 @@ export default function Services() {
           </div>
         </Reveal>
       </div>
+
+      {/* Postup je součástí téhle sekce: nejdřív co dělám, hned pod tím jak to probíhá */}
+      <Process />
 
       <AnimatePresence>
         {openProject && (

@@ -25,7 +25,7 @@ function Thumb({ id }) {
 
 // 3D prstenec videí: prostřední hraje hlavní roli, boční jsou ztlumená.
 // Klik na boční kartu / šipky = otočení, klik na prostřední = přehrát.
-function Ring({ items, visible, title, lang, catLabel, onOpen, soonLabel }) {
+function Ring({ items, visible, title, lang, catLabel, onOpen }) {
   const [idx, setIdx] = useState(0)
   const n = items.length
   if (n === 0) return null
@@ -62,7 +62,8 @@ function Ring({ items, visible, title, lang, catLabel, onOpen, soonLabel }) {
                   opacity: hidden ? 0 : off === 0 ? 1 : 0.45,
                   rotateY: off * -10,
                 }}
-                transition={{ type: 'spring', stiffness: 210, damping: 28 }}
+                // stejné časování jako prstenec služeb, ať oba carousely jedou stejně
+                transition={{ duration: 0.62, ease: [0.16, 1, 0.3, 1] }}
               >
                 <article
                   className={`work-card ${p.vertical ? 'vertical' : ''}`}
@@ -88,7 +89,6 @@ function Ring({ items, visible, title, lang, catLabel, onOpen, soonLabel }) {
                       <div className="work-cat">{catLabel(p.category)}</div>
                       <h4>{t}</h4>
                     </div>
-                    {!p.youtubeId && <span className="work-badge">{soonLabel}</span>}
                   </div>
                 </article>
               </motion.div>
@@ -145,7 +145,7 @@ export default function Work() {
   const wide = shown.filter((p) => !p.vertical)
   const verts = shown.filter((p) => p.vertical)
 
-  const ringProps = { lang, catLabel, onOpen: setOpenProject, soonLabel: w.soon }
+  const ringProps = { lang, catLabel, onOpen: setOpenProject }
 
   return (
     <section className="section" id="work">

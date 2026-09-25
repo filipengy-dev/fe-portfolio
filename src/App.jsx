@@ -7,7 +7,7 @@ import Stats from './components/Stats.jsx'
 import About from './components/About.jsx'
 import Services from './components/Services.jsx'
 import Work from './components/Work.jsx'
-import Process from './components/Process.jsx'
+import Reviews from './components/Reviews.jsx'
 import Contact from './components/Contact.jsx'
 import Footer from './components/Footer.jsx'
 
@@ -22,9 +22,9 @@ export default function App() {
         <Marquee />
         <Stats />
         <Work />
+        <Reviews />
         <Services />
         <About />
-        <Process />
         <Contact />
       </main>
       <Footer />

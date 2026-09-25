@@ -33,7 +33,7 @@ export default function Footer() {
       </div>
       <div className="container" style={{ marginTop: 24 }}>
         <small style={{ color: 'var(--faint)', fontSize: '0.82rem' }}>
-          © {year} Filip Engelhart — {t.footer.rights}
+          © {year} Filip Engelhart · {t.footer.rights}
         </small>
       </div>
     </footer>

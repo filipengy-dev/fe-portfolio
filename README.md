@@ -21,6 +21,32 @@ npm run preview  # náhled produkčního buildu
 | **Videa do portfolia** | `src/data/projects.js` |
 | **Barvy, fonty, mezery** | `src/index.css` (sekce `:root` nahoře) |
 | **Pořadí sekcí** | `src/App.jsx` |
+| **Čísla a graf v okně „Přehled"** | `src/data/dashboard.js` |
+| **Recenze klientů (text i video)** | `src/data/reviews.js` |
+| **Klienti a odkazy na jejich weby** | `src/i18n/translations.js` (dole) |
+
+## Okno „Přehled" (sekce statistik)
+
+Není to obrázek, je to funkční mini-appka:
+
+- **boční menu** přepíná dva pohledy (Přehled / Klienti), šipky ↑↓ fungují taky
+- **graf** ukazuje po najetí myší konkrétní hodnotu
+- **klik na logo klienta** otevře jeho web v nové záložce
+- **žlutý puntík** okno sbalí, **zelený** ho roztáhne na plnou šířku
+- **výška okna** se při přepnutí pohledu animuje, ať to neproblikne
+
+Čísla v grafu jsou zatím ilustrativní křivka růstu, ne export z YouTube Studia.
+
+## Recenze
+
+Sekce se vykreslí, až do `src/data/reviews.js` přidáš první položku. Dokud jsou
+obě pole prázdná, sekce ani odkaz v menu na webu nejsou.
+
+## Sekce na stránce
+
+Hero, pás klientů, okno „Přehled", Vybrané projekty, Reference, **Služby
+(včetně Spolupráce krok za krokem)**, O mně, Kontakt. Postup je spodní část
+sekce Služby, ale drží si vlastní kotvu `#process`.
 
 ## Jak přidat videa
 

@@ -1,7 +1,7 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { useLang } from '../i18n/LanguageContext.jsx'
 import HeroScene from './HeroScene.jsx'
-import { Arrow, Play } from './icons.jsx'
+import { Arrow, Play, Check } from './icons.jsx'
 
 export default function Hero() {
   const { t } = useLang()
@@ -96,7 +96,12 @@ export default function Hero() {
             </a>
           </motion.div>
 
-          <motion.p className="hero-role" variants={fade} custom={2} initial="hidden" animate="show">
+          <motion.p className="hero-free" variants={fade} custom={2} initial="hidden" animate="show">
+            <Check size={15} />
+            {t.hero.freeNote}
+          </motion.p>
+
+          <motion.p className="hero-role" variants={fade} custom={3} initial="hidden" animate="show">
             {t.hero.role}
           </motion.p>
         </div>

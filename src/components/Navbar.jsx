@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useLang } from '../i18n/LanguageContext.jsx'
+import { reviews, videoReviews } from '../data/reviews.js'
 import LogoMark from './LogoMark.jsx'
 
 // Malé vlaječky (inline SVG) pro přepínač jazyka.
@@ -41,8 +42,11 @@ export default function Navbar() {
     return () => (document.body.style.overflow = '')
   }, [open])
 
+  // odkaz na reference se objeví, až nějaká recenze bude
+  const hasReviews = reviews.length > 0 || videoReviews.length > 0
   const links = [
     { href: '#work', label: t.nav.work },
+    ...(hasReviews ? [{ href: '#reviews', label: t.nav.reviews }] : []),
     { href: '#services', label: t.nav.services },
     { href: '#about', label: t.nav.about },
     { href: '#process', label: t.nav.process },
