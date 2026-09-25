@@ -1,6 +1,7 @@
 // PROJEKTY / VIDEA
 // Přidat nové video: zkopíruj řádek a vyplň youtubeId (kód z odkazu),
 // category ('reels' | 'youtube' | 'ads' | 'motion' | 'ai'), vertical (true = na výšku),
+// Kategorií může být i víc naráz, pak se píšou do pole: category: ['ai', 'motion'].
 // a názvy titleCs / titleEn.
 // youtubeId = to za "youtu.be/" nebo "youtube.com/shorts/" (např. z youtu.be/2E8GxgTRM1U -> "2E8GxgTRM1U")
 export const projects = [
@@ -17,7 +18,16 @@ export const projects = [
   { id: 'v11', category: 'reels', vertical: true, youtubeId: 'tSfYluucZsc', titleCs: 'Mercedes — Instagram reels', titleEn: 'Mercedes — Instagram reel' },
   { id: 'v12', category: 'youtube', vertical: false, youtubeId: 'fGARiuXM0M8', titleCs: 'Dáváme — podcast', titleEn: 'Dáváme — podcast' },
   { id: 'v13', category: 'reels', vertical: true, youtubeId: 'XdJ48F5NLfM', titleCs: 'Content Partner — Instagram short', titleEn: 'Content Partner — Instagram short' },
+  { id: 'v14', category: 'ai', vertical: true, youtubeId: 'iQgI8LLkOaM', titleCs: 'Camera Angles', titleEn: 'Camera Angles' },
+  { id: 'v15', category: 'motion', vertical: true, youtubeId: 'ZJ8DLajQZrA', titleCs: 'Jablečný Honza CTA', titleEn: 'Jablečný Honza CTA' },
+  { id: 'v16', category: 'motion', vertical: true, youtubeId: 's5i2uaBIg9U', titleCs: 'Pipedrive Trial', titleEn: 'Pipedrive Trial' },
+  { id: 'v17', category: 'ai', vertical: true, youtubeId: 'EYieVKI5i_8', titleCs: 'AI Changes', titleEn: 'AI Changes' },
+  { id: 'v18', category: ['ai', 'motion'], vertical: true, youtubeId: 'b8SsFogT1Uo', titleCs: 'Video Breakdown', titleEn: 'Video Breakdown' },
+  { id: 'v19', category: 'ai', vertical: true, youtubeId: 'xBOTxWt6UeA', titleCs: 'Car change', titleEn: 'Car change' },
 ]
+
+// kategorie videa jako pole (zvládne i jedinou hodnotu zapsanou řetězcem)
+export const catsOf = (p) => (Array.isArray(p.category) ? p.category : [p.category])
 
 // pořadí odpovídá filtrům v translations (Vše, Reels & Shorts, YouTube, Reklama, Motion, AI videa)
 export const filterIds = ['all', 'reels', 'youtube', 'ads', 'motion', 'ai']

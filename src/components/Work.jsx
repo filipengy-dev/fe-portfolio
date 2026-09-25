@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useLang } from '../i18n/LanguageContext.jsx'
-import { projects, filterIds, thumbMax, thumbHq } from '../data/projects.js'
+import { projects, filterIds, thumbMax, thumbHq, catsOf } from '../data/projects.js'
 import Reveal from './Reveal.jsx'
 import VideoModal from './VideoModal.jsx'
 import { Play, Arrow } from './icons.jsx'
@@ -86,7 +86,7 @@ function Ring({ items, visible, title, lang, catLabel, onOpen }) {
                   </div>
                   <div className="work-meta">
                     <div>
-                      <div className="work-cat">{catLabel(p.category)}</div>
+                      <div className="work-cat">{catsOf(p).map(catLabel).join(" · ")}</div>
                       <h4>{t}</h4>
                     </div>
                   </div>
@@ -132,14 +132,14 @@ export default function Work() {
     () =>
       filterIds
         .map((id, i) => ({ id, label: w.filters[i] }))
-        .filter((f) => f.id === 'all' || projects.some((p) => p.category === f.id)),
+        .filter((f) => f.id === 'all' || projects.some((p) => catsOf(p).includes(f.id))),
     [w.filters]
   )
 
   const catLabel = (id) => w.filters[filterIds.indexOf(id)] || id
 
   const shown = useMemo(
-    () => (activeId === 'all' ? projects : projects.filter((p) => p.category === activeId)),
+    () => (activeId === 'all' ? projects : projects.filter((p) => catsOf(p).includes(activeId))),
     [activeId]
   )
   const wide = shown.filter((p) => !p.vertical)
