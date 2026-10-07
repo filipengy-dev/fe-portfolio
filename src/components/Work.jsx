@@ -146,8 +146,12 @@ export default function Work() {
     () => (activeId === 'all' ? projects : projects.filter((p) => catsOf(p).includes(activeId))),
     [activeId]
   )
+  // Vodorovná a svislá videa mají vlastní vějíř i uvnitř jedné kategorie.
+  // Jeden míchaný prstenec nejde: šířka karty je pro celý prstenec společná,
+  // takže by se svislé karty roztáhly na šířku vodorovných.
   const wide = shown.filter((p) => !p.vertical)
   const verts = shown.filter((p) => p.vertical)
+  const oba = wide.length > 0 && verts.length > 0
 
   const ringProps = { lang, catLabel, onOpen: setOpenProject }
 
@@ -188,14 +192,8 @@ export default function Work() {
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
             >
-              {activeId === 'all' ? (
-                <>
-                  <Ring items={wide} title={w.featuredLabel} {...ringProps} />
-                  <Ring items={verts} title={w.reelsLabel} {...ringProps} />
-                </>
-              ) : (
-                <Ring items={shown} title={null} {...ringProps} />
-              )}
+              <Ring items={wide} title={oba ? w.featuredLabel : null} {...ringProps} />
+              <Ring items={verts} title={oba ? w.reelsLabel : null} {...ringProps} />
             </motion.div>
           </AnimatePresence>
         </div>

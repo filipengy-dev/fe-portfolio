@@ -24,6 +24,10 @@ export const projects = [
   { id: 'v17', category: ['ai', 'reels'], vertical: true, youtubeId: 'EYieVKI5i_8', titleCs: 'AI Changes', titleEn: 'AI Changes' },
   { id: 'v18', category: ['ai', 'motion'], vertical: true, youtubeId: 'b8SsFogT1Uo', titleCs: 'Video Breakdown', titleEn: 'Video Breakdown' },
   { id: 'v19', category: ['ai', 'reels'], vertical: true, youtubeId: 'xBOTxWt6UeA', titleCs: 'Car change', titleEn: 'Car change' },
+  { id: 'v20', category: 'reels', vertical: true, youtubeId: 'aGNPYLyhUdY', titleCs: 'Yogiyo showreel', titleEn: 'Yogiyo showreel' },
+  { id: 'v21', category: 'ai', vertical: false, youtubeId: 'yeXQcEHZ7vQ', titleCs: 'Claude edit', titleEn: 'Claude edit' },
+  { id: 'v22', category: 'motion', vertical: true, youtubeId: 'MQoRitUT9zo', titleCs: 'Outro CTA', titleEn: 'Outro CTA' },
+  { id: 'v23', category: 'motion', vertical: true, youtubeId: 'MF_lSvu0G1g', titleCs: 'Pipedrive short', titleEn: 'Pipedrive short' },
 ]
 
 // kategorie videa jako pole (zvládne i jedinou hodnotu zapsanou řetězcem)
